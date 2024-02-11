@@ -1,5 +1,26 @@
 import Image from "next/image";
+const axios = require("axios");
+const moment = require("moment");
+const { scheduleJob } = require('node-schedule');
 
+const { sendLineMsgBroadcast } = require('./line.js');
+
+scheduleJob('0 12 * * *', async () => {//12:00
+    try {
+        const { data } = await axios.get("https://docs.google.com/spreadsheets/d/1T0xa5PPh6Lu1GaFcFPRV3zSkv1CtF8wf4JKs6Robnx8/edit?usp=sharing");
+        
+        const{
+            AQI, //AQI
+            Health, //ระดับมลพิษทางอากาศ
+        } = data;
+        
+        await sendLineMsgBroadcast(
+            //Flex Message
+        );
+    } catch (e) {
+        console.error(e);
+    }
+})
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
