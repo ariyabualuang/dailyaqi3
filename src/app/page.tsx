@@ -5,7 +5,7 @@ const { scheduleJob } = require('node-schedule');
 
 const { sendLineMsgBroadcast } = require('./line.js');
 
-scheduleJob('0 12 * * *', async () => {//12:00
+scheduleJob('0 40 13 * *', async () => {//12:00
     try {
         const { data } = await axios.get("https://docs.google.com/spreadsheets/d/1T0xa5PPh6Lu1GaFcFPRV3zSkv1CtF8wf4JKs6Robnx8/edit?usp=sharing");
         
